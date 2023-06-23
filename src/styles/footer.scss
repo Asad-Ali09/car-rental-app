@@ -1,0 +1,114 @@
+@import "colors";
+
+footer {
+  color: $primary;
+  background: linear-gradient(transparent 40%, black 40%);
+
+  > div.renty-ad {
+    width: 95%;
+    margin: auto;
+    color: $white;
+    background-image: url("https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80");
+    background-color: $primary;
+    text-align: center;
+
+    > article {
+      padding: 3rem;
+      width: 100%;
+      background: rgba($color: $primary, $alpha: 0.9);
+
+      > h2 {
+        padding: 1rem;
+        font: 700 3rem "roboto";
+      }
+      > p {
+        color: rgba($color: $white, $alpha: 0.82);
+        font: 400 1.3rem "roboto";
+        line-height: 1.9rem;
+        width: 40%;
+        margin: auto;
+      }
+      > div {
+        margin: 2rem;
+        @include d-flex;
+        gap: 2rem;
+        > button {
+          display: grid;
+          grid-template-columns: 1fr 3fr;
+          background-color: black;
+          color: white;
+          padding: 0.7rem;
+          border-radius: 0.5rem;
+          > svg {
+            width: 100%;
+            height: 100%;
+            margin: auto;
+          }
+          > p {
+            text-align: left;
+            font: 400 1rem "roboto";
+            > span {
+              display: block;
+              font: 700 1.5rem "roboto";
+            }
+          }
+          transition: all 0.3s;
+          &:hover {
+            cursor: pointer;
+            background-color: $white;
+            color: black;
+          }
+        }
+      }
+    }
+  }
+}
+
+.footer-links {
+  min-height: 150px;
+  width: 90%;
+  margin: auto;
+  color: $white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2rem;
+
+  > h1 {
+    > a {
+      color: $white;
+      font: 700 2rem "roboto";
+    }
+  }
+  a {
+    color: $white;
+    color: rgba($color: $white, $alpha: 0.8);
+    font: 400 1.3rem "roboto";
+    text-decoration: none;
+    &:hover {
+      cursor: pointer;
+      color: $white;
+    }
+    &:active {
+      transform: scale(1.1);
+    }
+  }
+
+  > h1 {
+    text-transform: uppercase;
+  }
+  > div {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    svg {
+      font-size: 1.7rem;
+      &:hover {
+        cursor: pointer;
+      }
+      &:active {
+        transform: scale(1.1);
+      }
+    }
+  }
+}

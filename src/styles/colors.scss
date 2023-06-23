@@ -1,0 +1,27 @@
+$primary: #5f51fc;
+$secondary: #1a1e23;
+$tertiary: #666666;
+$bg-color: #f8f8f8;
+$white: #ffffff;
+
+@mixin d-flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin hoverPrimary() {
+  transition: all 0.3s;
+  &:hover {
+    cursor: pointer;
+    filter: brightness(0.9);
+  }
+}
+@mixin hoverSecondary() {
+  transition: all 0.3s;
+  &:hover {
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.82);
+    color: $white;
+  }
+}

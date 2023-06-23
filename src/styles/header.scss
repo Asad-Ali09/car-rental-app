@@ -1,0 +1,61 @@
+@import "colors";
+
+.hidden {
+  display: none !important;
+}
+
+.header {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 1rem;
+  background-color: $white;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  > h1 {
+    font: 900 1.6rem "Roboto";
+    text-transform: uppercase;
+    > a {
+      text-decoration: none;
+      color: $secondary;
+    }
+  }
+
+  div {
+    > a {
+      text-decoration: none;
+      color: rgba(0, 0, 0, 0.82);
+      margin: 1rem;
+      font: 400 1.2rem "Roboto";
+      @include hoverSecondary;
+      &:hover {
+        padding: 1rem;
+      }
+    }
+  }
+  button {
+    display: flex;
+    color: $white;
+    background-color: $secondary;
+    align-items: center;
+    padding: 0.8rem 2rem;
+    border: none;
+    transition: all 0.3s;
+    > svg,
+    > p {
+      margin: 0 0.2rem;
+      font: 400 1rem "Roboto";
+    }
+    > svg {
+      font-size: 20px;
+    }
+
+    &:hover {
+      background-color: $white;
+      border: 1px solid black;
+      color: black;
+      cursor: pointer;
+    }
+  }
+}
