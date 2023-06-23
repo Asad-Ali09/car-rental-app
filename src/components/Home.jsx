@@ -98,7 +98,7 @@ const Home = () => {
               <p>Booking now</p>
               <BsFillTelephoneFill />
             </button>
-            <h3>See all cars</h3>
+            <h3 onClick={handleClick}>See all cars</h3>
           </div>
         </article>
         <img src={imgSrc} alt="Porsche" />
