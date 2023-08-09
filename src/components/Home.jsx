@@ -15,6 +15,7 @@ import {
   SiToyota,
   SiTesla,
 } from "react-icons/si";
+import { motion, AnimatePresence } from "framer-motion";
 
 import carSvg from "../assests/car.svg";
 import circles from "../assests/circle.svg";
@@ -47,18 +48,23 @@ const Home = () => {
   const refs = useRef([]);
 
   useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
-      const [entry] = entries;
-      if (entry.isIntersecting) {
-        entry.target.classList.add("animate");
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const [entry] = entries;
+        if (entry.isIntersecting) {
+          entry.target.classList.add("animate");
 
-        observer.unobserve(entry.target);
+          observer.unobserve(entry.target);
+        }
+
+        return () => {
+          observer.disconnect();
+        };
+      },
+      {
+        threshold: 0.5,
       }
-
-      return () => {
-        observer.disconnect();
-      };
-    }, []);
+    );
     // console.log(aboutAnimationRef.current);
     observer.observe(aboutAnimationRef.current);
     refs.current.map((el) => {
@@ -226,28 +232,9 @@ const Home = () => {
         </ul>
 
         <div className="cars" ref={(el) => (refs.current[refCount++] = el)}>
-          {carDisplayState === "popular"
-            ? getPopularCars().map((el) => {
-                return (
-                  <CarCard
-                    name={el.car}
-                    model={el.car_model}
-                    imgSrc={el.imgSrc}
-                    price={el.price}
-                    key={el.id}
-                  />
-                );
-              })
-            : carData.map((el) => {
-                var flag = true;
-                if (carDisplayState === "small" && el.type !== "small") {
-                  flag = false;
-                } else if (carDisplayState === "large" && el.type !== "large") {
-                  flag = false;
-                }
-
-                if (flag && carCount < 6) {
-                  carCount++;
+          <AnimatePresence>
+            {carDisplayState === "popular"
+              ? getPopularCars().map((el) => {
                   return (
                     <CarCard
                       name={el.car}
@@ -257,9 +244,33 @@ const Home = () => {
                       key={el.id}
                     />
                   );
-                }
-                return null;
-              })}
+                })
+              : carData.map((el) => {
+                  var flag = true;
+                  if (carDisplayState === "small" && el.type !== "small") {
+                    flag = false;
+                  } else if (
+                    carDisplayState === "large" &&
+                    el.type !== "large"
+                  ) {
+                    flag = false;
+                  }
+
+                  if (flag && carCount < 6) {
+                    carCount++;
+                    return (
+                      <CarCard
+                        name={el.car}
+                        model={el.car_model}
+                        imgSrc={el.imgSrc}
+                        price={el.price}
+                        key={el.id}
+                      />
+                    );
+                  }
+                  return null;
+                })}
+          </AnimatePresence>
         </div>
         <button onClick={handleClick}>
           See all cars <span>&#8640;</span>
@@ -281,7 +292,19 @@ const Card = ({ title, desc, cardImage }) => {
 
 const CarCard = ({ name, model, imgSrc, price }) => {
   return (
-    <div className="car-card">
+    <motion.div
+      layout
+      initial={{ opacity: 0.4, scale: 0.4, y: 50 }}
+      animate={{ opacity: 1, scale: 1, y: 0 }}
+      exit={{
+        opacity: 0.4,
+        scale: 0.4,
+        y: 50,
+        transition: { duration: 0.2, ease: "easeIn" },
+      }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+      className="car-card"
+    >
       <img src={imgSrc} alt="Car" />
       <p>
         $ {price.split("$")[1]}
@@ -292,7 +315,7 @@ const CarCard = ({ name, model, imgSrc, price }) => {
         <p>Booking Now</p>
         <BsFillTelephoneFill />
       </button>
-    </div>
+    </motion.div>
   );
 };
 
